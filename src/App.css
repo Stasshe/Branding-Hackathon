@@ -35,3 +35,9 @@
   color: var(--dac-blue); /* タイトルも青く光らせる */
   transition: color 0.3s ease;
 }
+
+/* src/App.css の一番下に追加 */
+.footer-link:hover {
+  color: #fff !important; /* マウスを置くと白く光る */
+  text-decoration: underline !important;
+}

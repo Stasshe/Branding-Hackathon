@@ -1,7 +1,9 @@
 /* src/index.css */
+
 :root {
-  --primary-color: #000;
-  --bg-color: #fff;
+  --dac-blue: #0057ff;
+  --dac-dark: #1a1a1a;
+  --white: #ffffff;
 }
 
 * {
@@ -11,17 +13,19 @@
 }
 
 body {
-  font-family: 'Helvetica Neue', Arial, sans-serif; /* プロフェッショナルなフォント指定 */
-  background-color: var(--bg-color);
-  color: var(--primary-color);
-  line-height: 1.6;
+  /* 日本語と英字の組み合わせを最適化 */
+  font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+  -webkit-font-smoothing: antialiased; /* 文字を滑らかにする */
+  -moz-osx-font-smoothing: grayscale;
 }
 
-ul {
-  list-style: none;
+/* ナビゲーションや見出しの英字を少し詰めて力強くする */
+h1, h2, h3, .nav-item {
+  letter-spacing: -0.02em; /* わずかに詰めると高級感が出る */
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* 説明文などの長文は逆に少し広げて読みやすくする */
+p {
+  letter-spacing: 0.05em;
+  line-height: 1.8;
 }

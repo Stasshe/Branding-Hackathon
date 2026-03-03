@@ -1,17 +1,17 @@
-// src/App.jsx
-import React from 'react';
 import Navigator from './components/Navigator';
 import Home from './Pages/Home';
+import Footer from './components/Footer'; // ★追加
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Navigator />
       <main>
         <Home />
       </main>
-    </div>
+      <Footer /> {/* ★一番下に追加 */}
+    </>
   );
 }
 
