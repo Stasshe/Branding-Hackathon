@@ -99,21 +99,68 @@ const Home = () => {
             }}></span>
           </motion.h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px' }}>
-            {[1, 2, 3].map((n) => (
-              <motion.div 
-                key={n}
-                variants={itemVariants}
-                style={{ backgroundColor: '#fff', padding: '40px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}
-              >
-                <h3>Service {n}</h3>
-                <p style={{ color: '#666', marginTop: '15px' }}>デジタルの力で、ビジネスの可能性を広げます。</p>
-              </motion.div>
-            ))}
-          </div>
+<div style={{ 
+  display: 'grid', 
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+  gap: '40px' 
+}}>
+  {[
+    { title: "Media Services", desc: "メディアの価値を最大化する広告運用とプランニングを提供します。" },
+    { title: "Solution Services", desc: "最新のテクノロジーを活用し、企業のDXを強力に推進します。" },
+    { title: "Data Business", desc: "膨大なデータを分析し、次の一手につながるインサイトを導き出します。" }
+  ].map((service, i) => (
+    <motion.div 
+      key={i}
+      variants={itemVariants}
+      whileHover={{ y: -10 }} // ★マウスを置くと10px上に浮く
+      className="service-card"
+      style={{ 
+        backgroundColor: '#fff', 
+        padding: '50px 40px', 
+        boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+        borderBottom: '4px solid transparent', // ホバー時の仕掛け
+        transition: 'all 0.3s ease',
+        cursor: 'pointer',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+    >
+      {/* カード内の装飾（青い小さな正方形） */}
+      <div style={{ 
+        width: '30px', 
+        height: '30px', 
+        backgroundColor: 'rgba(0, 87, 255, 0.1)', 
+        marginBottom: '20px',
+        borderRadius: '4px'
+      }}></div>
+
+      <h3 style={{ fontSize: '1.5rem', marginBottom: '20px', fontWeight: 'bold' }}>
+        {service.title}
+      </h3>
+      <p style={{ color: '#666', lineHeight: '1.8', fontSize: '0.95rem' }}>
+        {service.desc}
+      </p>
+
+      {/* 右下の矢印アイコン（擬似要素） */}
+      <div style={{ 
+        marginTop: '30px', 
+        color: 'var(--dac-blue)', 
+        fontWeight: 'bold', 
+        fontSize: '0.8rem',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '5px'
+      }}>
+        LEARN MORE <span>→</span>
+      </div>
+    </motion.div>
+  ))}
+</div>
         </motion.div>
       </section>
     </div>
+
+    
   );
 };
 
