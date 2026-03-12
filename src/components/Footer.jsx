@@ -34,7 +34,7 @@ const Footer = () => {
         {/* ロゴエリア */}
         <div style={{ ...columnStyle, flex: '1.5' }}>
           <h2 style={{ fontSize: '24px', fontWeight: '900', letterSpacing: '2px', marginBottom: '10px' }}>
-            DAC CLONE
+            Rippro
           </h2>
           <p style={{ color: '#888', lineHeight: '1.6', maxWidth: '300px' }}>
             デジタル・アドバタイジング・コンソーシアム株式会社<br />

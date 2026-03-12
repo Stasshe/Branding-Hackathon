@@ -41,3 +41,69 @@
   color: #fff !important; /* マウスを置くと白く光る */
   text-decoration: underline !important;
 }
+
+/* src/App.css */
+
+/* --- 既存のホバー下線アニメーション (.nav-item::after など) はそのまま --- */
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+  width: 100%;
+}
+
+
+/* --- ★ 新規追加：ナビゲーションロゴのサイズ調整 --- */
+.nav-logo {
+  height: 35px; /* ナビバーの高さに合わせて調整。適宜変更してください */
+  width: auto;  /* アスペクト比を維持 */
+  transition: height 0.4s ease; /* スクロール時の縮小アニメーション用 */
+}
+
+/* スクロール時にロゴを少し小さくする演出（お好みで） */
+/* .is-scrolled .nav-logo {
+  height: 30px;
+}
+*/
+
+
+/* --- ★ 新規追加：CONTACTボタンのアニメーション --- */
+/* (VIEW MOREボタン (.dac-button:hover) と同じ動きを適用) */
+
+.nav-contact {
+  /* 共通の遷移設定 */
+  transition: all 0.3s ease !important;
+}
+
+.nav-contact:hover {
+  /* ホバー時に背景色を濃い青にし、文字を白にする */
+  background-color: #0046cc !important; /* 少し濃い青 */
+  color: #fff !important; /* 文字は白に固定 */
+  border-color: #0046cc !important;
+  
+  /* 少し浮き上がり、影をつける演出 */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 87, 255, 0.3);
+}
+
+/* ロゴの表示が崩れないようにするための補足 */
+.nav-logo {
+  display: block;
+  max-width: 200px; /* ロゴが大きすぎないように制限 */
+}
+
+/* CONTACTボタンのホバー反応をよりハッキリさせる */
+.nav-contact:hover {
+  background-color: #0057ff !important;
+  color: #fff !important;
+  transform: scale(1.05); /* 少しだけ大きくして「反応した」感を出す */
+}
