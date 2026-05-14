@@ -1,7 +1,8 @@
+// src/App.jsx
+
 import Navigator from './components/Navigator';
 import Home from './Pages/Home';
-import Footer from './components/Footer'; // ★追加
-import './App.css';
+// import Footer from './components/Footer'; // ★これを削除（またはコメントアウト）
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <main>
         <Home />
       </main>
-      <Footer /> {/* ★一番下に追加 */}
+      {/* <Footer /> */} {/* ★ここを削除してください */}
     </>
   );
 }

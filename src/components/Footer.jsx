@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   const footerStyle = {
-    backgroundColor: '#1a1a1a', // DACらしい深い黒
+    backgroundColor: '#1a1a1a',
     color: '#fff',
     padding: '80px 10% 40px',
     fontSize: '14px'
@@ -34,11 +34,10 @@ const Footer = () => {
         {/* ロゴエリア */}
         <div style={{ ...columnStyle, flex: '1.5' }}>
           <h2 style={{ fontSize: '24px', fontWeight: '900', letterSpacing: '2px', marginBottom: '10px' }}>
-            Rippro
+            Branding
           </h2>
           <p style={{ color: '#888', lineHeight: '1.6', maxWidth: '300px' }}>
-            デジタル・アドバタイジング・コンソーシアム株式会社<br />
-            Empowering the digital future.
+            立命館大学情報理工学部プロジェクト団体RiST、Rippro<br />
           </p>
         </div>
 
