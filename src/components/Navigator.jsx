@@ -77,7 +77,7 @@ const Navigator = () => {
           cursor: 'pointer',
           transition: 'all 0.3s ease',
         }}>
-          CONTACT
+          ENTRY
         </li>
       </ul>
     </nav>

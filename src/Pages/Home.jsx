@@ -42,7 +42,7 @@ const Home = () => {
       id: 'schedule', 
       title: "SCHEDULE", 
       desc: "開催概要・アクセス", 
-      detail: "【日時】2026/06/11 ~ 2026/06/20 \n【場所】立命館大学 大阪茨木キャンパス（大阪府茨木市岩倉町2-150） \nJR茨木駅から徒歩約5分。最新の設備が整ったキャンパスで開催します。" 
+      detail: `【日時】\n※さらに詳しいタイムテーブルは公式Discordにて発表します。\n\n・6/11(木) 17:00~18:00\n　対面キックオフ（参加困難な場合は要連絡）\n・6/13(土) 12:00\n　開発開始（ハックオフ）\n・6/18(木) 17:00~18:00\n　オンライン中間発表会\n・6/20(土) 12:00\n　コードフリーズ（開発終了）\n・6/21(日)\n　対面最終プレゼンテーション・審査会\n\n【場所】\n立命館大学 大阪茨木キャンパス（OIC）\n大阪府茨木市岩倉町2-150\nJR茨木駅から徒歩約5分。\n\n【MAP】`
     },
     { 
       id: 'rule', 
@@ -74,6 +74,19 @@ const Home = () => {
       </h1>
       <div style={{ fontSize: '1.2rem', lineHeight: '2', color: '#444', maxWidth: '800px', whiteSpace: 'pre-wrap' }}>
         {content.detail}
+        {content.id === 'schedule' && (
+          <div style={{ marginTop: '30px', width: '100%', height: '300px', borderRadius: '8px', overflow: 'hidden' }}>
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3275.9613628461014!2d135.55831207644336!3d34.80690027663249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000fd91361c479d%3A0x6b8763595603b544!2z56uL5ZG96aSo5aSn5a2mIOWkp-mYqueMqOacqOOCreODo-ODs-ODkeOCuQ!5e0!3m2!1sja!2sjp!4v1715740000000!5m2!1sja!2sjp" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen="" 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        )}
       </div>
     </motion.div>
   );
@@ -84,7 +97,6 @@ const Home = () => {
         {selectedPage && <DetailPage content={selectedPage} />}
       </AnimatePresence>
 
-      {/* HERO SECTION */}
       <section style={{ height: '100vh', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 10%', position: 'relative', color: '#fff', overflow: 'hidden', backgroundColor: '#1a1a1a' }}>
         <motion.div 
           style={{ 
@@ -109,12 +121,11 @@ const Home = () => {
             style={{ fontSize: '1.2rem', marginTop: '40px', fontWeight: '500', letterSpacing: '0.2em' }} 
             variants={itemVariants}
           >
-            2026.06.11 - 06.20 | Ritsumeikan OIC
+            2026.06.11 - 06.21 | Ritsumeikan OIC
           </motion.p>
         </motion.div>
       </section>
 
-      {/* CARDS SECTION */}
       <section style={{ padding: '120px 10%', backgroundColor: '#f8f9fa' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '40px' }}>
           {contents.map((item) => (
@@ -139,7 +150,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* SPONSORS SECTION */}
       <section id="sponsors" style={{ padding: '100px 10%', backgroundColor: '#fff', borderTop: '1px solid #eee' }}>
         <h2 style={{ fontSize: '1rem', fontWeight: '900', textAlign: 'center', marginBottom: '60px', color: '#999', letterSpacing: '0.3em' }}>SPONSORS</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '60px', opacity: 0.8 }}>
@@ -155,27 +165,36 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CLEAN FOOTER */}
       <footer style={{ padding: '80px 10% 40px', backgroundColor: '#1a1a1a', color: '#fff' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', marginBottom: '60px' }}>
           <div>
-            <h4 style={{ color: '#0057ff', marginBottom: '20px', fontSize: '14px' }}>ORGANIZERS</h4>
-            <ul style={{ listStyle: 'none', padding: 0, color: '#999', fontSize: '13px', lineHeight: '2' }}>
-              <li>RiPPro / RiST</li>
+            <h4 style={{ color: '#0057ff', marginBottom: '20px', fontSize: '14px', letterSpacing: '0.1em' }}>ORGANIZERS</h4>
+            <ul style={{ listStyle: 'none', padding: 0, color: '#999', fontSize: '13px', lineHeight: '2.2' }}>
+              <li>RiST / Rippro </li>
               <li>立命館大学 情報理工学部</li>
             </ul>
           </div>
           <div>
-            <h4 style={{ color: '#0057ff', marginBottom: '20px', fontSize: '14px' }}>SOCIAL</h4>
-            <ul style={{ listStyle: 'none', padding: 0, color: '#999', fontSize: '13px', lineHeight: '2' }}>
-              <li>X (Twitter)</li>
-              <li>Instagram</li>
+            <h4 style={{ color: '#0057ff', marginBottom: '20px', fontSize: '14px', letterSpacing: '0.1em' }}>SOCIAL</h4>
+            <ul style={{ listStyle: 'none', padding: 0, color: '#999', fontSize: '13px', lineHeight: '2.2' }}>
+              {/* ★ X (Twitter) リンク追加 */}
+              <li style={{ cursor: 'pointer' }}>
+                <a href="https://x.com/realrist?s=11&t=A_siZ3q3GkjvsfojOOQrIA" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>X (Twitter)</a>
+              </li>
+              {/* ★ Instagram リンク追加 */}
+              <li style={{ cursor: 'pointer' }}>
+                <a href="https://www.instagram.com/rist_rits.sec?igsh=c3FnMWVraTlwYjNq" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>Instagram</a>
+              </li>
             </ul>
           </div>
         </div>
+        
         <div style={{ borderTop: '1px solid #333', paddingTop: '40px', textAlign: 'center' }}>
-          <p style={{ color: '#666', fontSize: '11px' }}>
-            © 2026 Branding Hackathon Executive Committee.
+          <div style={{ marginBottom: '15px' }}>
+             <span style={{ fontWeight: '900', fontSize: '18px', letterSpacing: '0.05em' }}>Branding <span style={{ color: '#0057ff' }}>Hackathon</span></span>
+          </div>
+          <p style={{ color: '#666', fontSize: '11px', letterSpacing: '0.05em' }}>
+            © 2026 Branding Hackathon Executive Committee. All Rights Reserved.
           </p>
         </div>
       </footer>
