@@ -66,7 +66,7 @@ const Navigator = () => {
       <ul style={{ display: 'flex', gap: '30px', alignItems: 'center', listStyle: 'none', fontSize: '13px', fontWeight: '900', letterSpacing: '0.1em' }}>
         <li className="nav-item" onClick={() => scrollToSection('about')} style={{ cursor: 'pointer' }}>ABOUT</li>
         <li className="nav-item" onClick={() => scrollToSection('schedule')} style={{ cursor: 'pointer' }}>SCHEDULE</li>
-        <li className="nav-item" onClick={() => scrollToSection('rule')} style={{ cursor: 'pointer' }}>RULE</li>
+        <li className="nav-item" onClick={() => scrollToSection('rule')} style={{ cursor: 'pointer' }}>GUILDLINE</li>
         <li className="nav-item" onClick={() => scrollToSection('sponsors')} style={{ cursor: 'pointer' }}>SPONSORS</li>
         <li className="nav-contact" onClick={handleContactClick} style={{ 
           color: isScrolled ? '#0057ff' : '#fff',

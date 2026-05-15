@@ -27,8 +27,6 @@ const Home = () => {
 
   const sponsorLogos = [
     { id: 1, src: "/assets/sponsor1.png", name: "Sponsor A" },
-    { id: 2, src: "/assets/sponsor2.png", name: "Sponsor B" },
-    { id: 3, src: "/assets/sponsor3.png", name: "Sponsor C" },
   ];
 
   const contents = [
@@ -46,9 +44,9 @@ const Home = () => {
     },
     { 
       id: 'rule', 
-      title: "RULE", 
-      desc: "参加規約・ルール", 
-      detail: "【参加資格】学生・社会人問わず参加可能。個人またはチーム(最大4名)での応募が可能です。\n\n【開発規定】期間中にゼロから作成したプロダクトが対象です。" 
+      title: "GUIDELINE", 
+      desc: "参加に関する案内", 
+      detail: "【参加資格】\n学生のみ参加可能です。個人での応募（運営側でチームを編成します）、または1チーム3〜4名での応募を受け付けています。\n\n【開発規定】\nハッカソン期間中にゼロから作成されたプロダクトが審査対象となります。\n\n【参加費】\n500円。6/11のキックオフ当日に徴収させていただきます。\n\n【賞について】\nComing Soon... 詳細が決まり次第、順次発表いたします。" 
     }
   ];
 
@@ -177,11 +175,9 @@ const Home = () => {
           <div>
             <h4 style={{ color: '#0057ff', marginBottom: '20px', fontSize: '14px', letterSpacing: '0.1em' }}>SOCIAL</h4>
             <ul style={{ listStyle: 'none', padding: 0, color: '#999', fontSize: '13px', lineHeight: '2.2' }}>
-              {/* ★ X (Twitter) リンク追加 */}
               <li style={{ cursor: 'pointer' }}>
                 <a href="https://x.com/realrist?s=11&t=A_siZ3q3GkjvsfojOOQrIA" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>X (Twitter)</a>
               </li>
-              {/* ★ Instagram リンク追加 */}
               <li style={{ cursor: 'pointer' }}>
                 <a href="https://www.instagram.com/rist_rits.sec?igsh=c3FnMWVraTlwYjNq" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>Instagram</a>
               </li>
