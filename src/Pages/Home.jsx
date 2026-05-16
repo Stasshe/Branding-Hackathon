@@ -100,7 +100,7 @@ const Home = () => {
           style={{ 
             position: 'absolute', top: 0, left: 0, width: '100%', height: '120%', zIndex: 0,
             y: backgroundY, 
-            backgroundImage: 'url("/Branding1.png")', 
+            backgroundImage: 'url("/Branding-Hackathon/Branding1.png")',
             backgroundSize: 'cover', 
             backgroundPosition: 'center',
           }} 

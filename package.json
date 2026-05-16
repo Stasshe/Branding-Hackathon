@@ -1,7 +1,28 @@
 {
+  "name": "branding-hackathon-homepage",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "homepage": "https://RiST-Maomao.github.io/Branding-Hackathon/",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "framer-motion": "^x.x.x",
+    "react": "^x.x.x",
+    "react-dom": "^x.x.x"
+  },
+  "devDependencies": {
+    "@types/react": "^x.x.x",
+    "@types/react-dom": "^x.x.x",
+    "@vitejs/plugin-react": "^x.x.x",
+    "eslint": "^x.x.x",
+    "gh-pages": "^x.x.x",
+    "vite": "^x.x.x"
   }
 }
