@@ -1,12 +1,7 @@
 // src/pages/Home.jsx
 
 import React, { useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-
-// ★ 画像をインポート (src/assets または public にある場合でも、Viteが正しく処理します)
-// ファイルが src/assets/Branding1.png にあると想定していますが、
-// もし public にある場合は import bgImage from '/Branding1.png'; に書き換えてください
-import bgImage from '/Branding1.png'; 
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'; 
 
 const containerVariants = {
   hidden: { opacity: 0 },
