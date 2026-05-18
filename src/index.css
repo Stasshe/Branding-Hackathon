@@ -1,8 +1,6 @@
-/* src/index.css */
-
 :root {
-  --dac-blue: #0057ff;
-  --dac-dark: #1a1a1a;
+  --blue: #0057ff;
+  --dark: #1a1a1a;
   --white: #ffffff;
 }
 
@@ -12,20 +10,229 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  /* 日本語と英字の組み合わせを最適化 */
   font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
-  -webkit-font-smoothing: antialiased; /* 文字を滑らかにする */
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* ナビゲーションや見出しの英字を少し詰めて力強くする */
 h1, h2, h3, .nav-item {
-  letter-spacing: -0.02em; /* わずかに詰めると高級感が出る */
+  letter-spacing: -0.02em;
 }
 
-/* 説明文などの長文は逆に少し広げて読みやすくする */
 p {
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   line-height: 1.8;
+}
+
+/* ─── Hero ─────────────────────────────────────── */
+.hero-section {
+  position: relative;
+  height: 100dvh;
+  min-height: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 clamp(20px, 8%, 10%);
+  overflow: hidden;
+  color: #fff;
+  background-color: #1a1a1a;
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 9vw, 7rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.hero-sub {
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  margin-top: 28px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.75);
+}
+
+.hero-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0057ff;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  padding: 14px 28px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.hero-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #fff;
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  padding: 14px 28px;
+  border-radius: 2px;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ─── Cards ─────────────────────────────────────── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.card {
+  background: #fff;
+  padding: 40px 32px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  border-bottom-color: #0057ff;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+}
+
+/* ─── Detail Page ───────────────────────────────── */
+.detail-inner {
+  padding: clamp(80px, 12vw, 120px) clamp(20px, 8%, 10%) clamp(40px, 6vw, 80px);
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0057ff;
+  letter-spacing: 0.08em;
+  margin-bottom: 40px;
+  padding: 0;
+}
+
+.detail-title {
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: #0057ff;
+  line-height: 1;
+}
+
+.detail-body {
+  font-size: clamp(0.875rem, 2.5vw, 1.05rem);
+  line-height: 2;
+  color: #444;
+  white-space: pre-wrap;
+}
+
+.map-wrap {
+  margin-top: 40px;
+  width: 100%;
+  height: clamp(240px, 40vw, 360px);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* ─── Footer ────────────────────────────────────── */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+.footer-link:hover {
+  color: #fff !important;
+}
+
+/* ─── Navigator ─────────────────────────────────── */
+.nav-item:hover {
+  color: #0057ff;
+  transition: color 0.2s;
+}
+
+/* ─── Responsive: tablet ────────────────────────── */
+@media (max-width: 900px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-grid > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ─── Responsive: mobile ────────────────────────── */
+@media (max-width: 600px) {
+  .nav-desktop {
+    display: none !important;
+  }
+
+  .nav-hamburger {
+    display: block !important;
+  }
+
+  .hero-section {
+    padding: 0 20px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 28px 24px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .hero-cta-primary,
+  .hero-cta-secondary {
+    padding: 13px 22px;
+    font-size: 0.8rem;
+    flex: 1 1 0;
+    justify-content: center;
+  }
+}
+
+/* ─── Responsive: large desktop ─────────────────── */
+@media (min-width: 1400px) {
+  .cards-grid {
+    gap: 32px;
+  }
 }
