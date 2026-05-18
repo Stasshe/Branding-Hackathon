@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import { Target, Shield, Handshake, Megaphone, TrendingUp } from 'lucide-react';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden:  { opacity: 0, y: 18 },
   visible: (i = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
   }),
 };
 
@@ -40,7 +40,7 @@ const CRITERIA = [
 
 const About = () => (
   <div className="subpage">
-    <div className="subpage-hero">
+    <div className="subpage-hero" data-title="About">
       <div className="subpage-hero-inner">
         <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0} className="subpage-eyebrow">
           INFORMATION
@@ -63,18 +63,26 @@ const About = () => (
       </motion.p>
 
       <div className="criteria-list">
-        {CRITERIA.map((c) => {
+        {CRITERIA.map((c, i) => {
           const Icon = c.icon;
           return (
-            <div key={c.label} className="criteria-item">
+            <motion.div
+              key={c.label}
+              className="criteria-item"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-20px' }}
+              custom={i * 0.25}
+            >
               <div className="criteria-icon-wrap">
-                <Icon size={20} color="#0057ff" />
+                <Icon size={18} color="var(--blue)" />
               </div>
               <div className="criteria-content">
                 <h2 className="criteria-label">{c.label}</h2>
                 <p className="criteria-body">{c.body}</p>
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>

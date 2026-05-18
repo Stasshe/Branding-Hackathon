@@ -3,24 +3,24 @@ import { motion } from 'framer-motion';
 import { MapPin } from 'lucide-react';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden:  { opacity: 0, y: 18 },
   visible: (i = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
   }),
 };
 
 const TIMELINE = [
-  { date: '6/11 (木)', time: '17:00〜18:00', label: 'キックオフ', note: '対面。参加困難な場合は要連絡' },
-  { date: '6/13 (土)', time: '12:00', label: '開発開始', note: 'ハックオフ', highlight: true },
-  { date: '6/18 (木)', time: '17:00〜18:00', label: '中間発表会', note: 'オンライン開催' },
-  { date: '6/20 (土)', time: '12:00', label: 'コードフリーズ', note: '開発終了', highlight: true },
-  { date: '6/21 (日)', time: '終日', label: '最終プレゼンテーション', note: '対面・審査会', highlight: true },
+  { date: '6/11 (木)', time: '17:00〜18:00', label: 'キックオフ',           note: '対面。参加困難な場合は要連絡' },
+  { date: '6/13 (土)', time: '12:00',         label: '開発開始',             note: 'ハックオフ',     highlight: true },
+  { date: '6/18 (木)', time: '17:00〜18:00', label: '中間発表会',           note: 'オンライン開催' },
+  { date: '6/20 (土)', time: '12:00',         label: 'コードフリーズ',       note: '開発終了',       highlight: true },
+  { date: '6/21 (日)', time: '終日',          label: '最終プレゼンテーション', note: '対面・審査会',  highlight: true },
 ];
 
 const Schedule = () => (
   <div className="subpage">
-    <div className="subpage-hero">
+    <div className="subpage-hero subpage-hero--long" data-title="Schedule">
       <div className="subpage-hero-inner">
         <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0} className="subpage-eyebrow">
           INFORMATION
@@ -38,6 +38,7 @@ const Schedule = () => (
       <motion.p
         variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
         className="section-label"
+        style={{ marginBottom: '12px' }}
       >
         TIMELINE
       </motion.p>
@@ -52,14 +53,18 @@ const Schedule = () => (
         {TIMELINE.map((item, i) => (
           <motion.div
             key={i}
-            variants={fadeUp} initial="hidden" whileInView="visible"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, margin: '-20px' }}
-            custom={i * 0.5}
+            custom={i * 0.2}
             className={`timeline-item${item.highlight ? ' timeline-item--highlight' : ''}`}
           >
-            <div className="timeline-dot" />
-            <div className="timeline-content">
-              <div className="timeline-date">{item.date} <span className="timeline-time">{item.time}</span></div>
+            <div className="timeline-date-col">
+              <div className="timeline-date">{item.date}</div>
+              <div className="timeline-time">{item.time}</div>
+            </div>
+            <div>
               <div className="timeline-label">{item.label}</div>
               {item.note && <div className="timeline-note">{item.note}</div>}
             </div>
@@ -67,22 +72,28 @@ const Schedule = () => (
         ))}
       </div>
 
-      <motion.div
-        variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-        className="subpage-section-gap"
-      >
-        <p className="section-label">VENUE</p>
-        <div className="venue-card">
+      <div className="subpage-section-gap">
+        <motion.p
+          variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+          className="section-label"
+          style={{ marginBottom: '24px' }}
+        >
+          VENUE
+        </motion.p>
+        <motion.div
+          variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+          className="venue-card"
+        >
           <div className="venue-icon">
-            <MapPin size={20} color="#0057ff" />
+            <MapPin size={18} color="var(--blue)" />
           </div>
           <div>
             <p className="venue-name">立命館大学 大阪茨木キャンパス（OIC）</p>
             <p className="venue-address">大阪府茨木市岩倉町2-150</p>
             <p className="venue-access">JR茨木駅から徒歩約5分</p>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
 
       <motion.div
         variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}

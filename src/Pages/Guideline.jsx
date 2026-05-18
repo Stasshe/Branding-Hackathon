@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import { GraduationCap, Code2, Coins, Trophy } from 'lucide-react';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden:  { opacity: 0, y: 18 },
   visible: (i = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
   }),
 };
 
@@ -36,7 +36,7 @@ const SECTIONS = [
 
 const Guideline = () => (
   <div className="subpage">
-    <div className="subpage-hero">
+    <div className="subpage-hero subpage-hero--long" data-title="Guideline">
       <div className="subpage-hero-inner">
         <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0} className="subpage-eyebrow">
           INFORMATION
@@ -57,15 +57,17 @@ const Guideline = () => (
           return (
             <motion.div
               key={s.label}
-              variants={fadeUp} initial="hidden" whileInView="visible"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: '-20px' }}
-              custom={i * 0.5}
+              custom={i * 0.25}
               className={`guideline-card${s.soon ? ' guideline-card--soon' : ''}`}
             >
               <span className="guideline-card-index">0{i + 1}</span>
               <div className="guideline-card-left">
                 <div className="guideline-icon-wrap">
-                  <Icon size={20} color="#0057ff" />
+                  <Icon size={18} color="var(--blue)" />
                 </div>
                 <h2 className="guideline-label">{s.label}</h2>
               </div>

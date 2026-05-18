@@ -6,22 +6,23 @@ import logoImg1 from '../assets/rippro-logo.bmp';
 import logoImg2 from '../assets/RiSTロゴ.png';
 
 const NAV_ITEMS = [
-  { label: 'ABOUT', path: '/about' },
-  { label: 'SCHEDULE', path: '/schedule' },
+  { label: 'HOME',     path: '/' },
+  { label: 'ABOUT',     path: '/about' },
+  { label: 'SCHEDULE',  path: '/schedule' },
   { label: 'GUIDELINE', path: '/guideline' },
-  { label: 'SPONSORS', id: 'sponsors' },
+  { label: 'SPONSORS',  id: 'sponsors' },
 ];
 
 const ENTRY_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSedrQBRVl9iQsvCj-enYqWWXabb-ieJAuYv-PebJK6nXTNNwg/viewform?usp=publish-editor';
 
 const Navigator = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [menuOpen,   setMenuOpen]   = useState(false);
+  const navigate  = useNavigate();
+  const location  = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 50);
+    const onScroll = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -44,103 +45,53 @@ const Navigator = () => {
       if (location.pathname !== '/') {
         navigate('/');
         setTimeout(() => {
-          const el = document.getElementById(item.id);
-          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 300);
       } else {
         const el = document.getElementById(item.id);
         if (el) {
-          const top = el.getBoundingClientRect().top + window.scrollY - 80;
-          window.scrollTo({ top, behavior: 'smooth' });
+          window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 63, behavior: 'smooth' });
         }
       }
     }
   };
 
-  const isSubPage = location.pathname !== '/';
-  const scrolled = isScrolled || menuOpen || isSubPage;
-  const textColor = scrolled ? '#000' : '#fff';
-  const bgColor = scrolled ? 'rgba(255,255,255,0.97)' : 'transparent';
-  const shadow = scrolled ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
-
   return (
     <>
-      <nav style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: scrolled ? '10px 5%' : '22px 5%',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        transition: 'padding 0.4s cubic-bezier(0.4,0,0.2,1), background-color 0.4s, box-shadow 0.4s',
-        zIndex: 1000,
-        backgroundColor: bgColor,
-        boxShadow: shadow,
-        color: textColor,
-      }}>
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '16px', textDecoration: 'none' }}>
-          <img src={logoImg2} alt="RiST" style={{ height: scrolled ? '28px' : '40px', width: 'auto', transition: 'height 0.4s ease' }} />
-          <img src={logoImg1} alt="RiPPro" style={{ height: scrolled ? '28px' : '40px', width: 'auto', transition: 'height 0.4s ease' }} />
+      <nav className={`nav-wrap${isScrolled ? ' nav-wrap--compact' : ''}`}>
+        <Link to="/" className="nav-logo-group">
+          <img src={logoImg2} alt="RiST"   className="nav-logo" />
+          <div className="nav-divider" />
+          <img src={logoImg1} alt="RiPPro" className="nav-logo" />
         </Link>
 
-        <ul style={{
-          display: 'flex',
-          gap: '28px',
-          alignItems: 'center',
-          listStyle: 'none',
-          fontSize: '13px',
-          fontWeight: '900',
-          letterSpacing: '0.1em',
-          margin: 0,
-          padding: 0,
-        }} className="nav-desktop">
+        <ul className="nav-list">
           {NAV_ITEMS.map(item => (
-            <li key={item.label} onClick={() => handleNavClick(item)} style={{ cursor: 'pointer', color: textColor }} className="nav-item">
+            <li
+              key={item.label}
+              className={`nav-item${item.path && location.pathname === item.path ? ' nav-item--active' : ''}`}
+              onClick={() => handleNavClick(item)}
+            >
               {item.label}
             </li>
           ))}
           <li>
-            <button onClick={() => window.open(ENTRY_URL, '_blank')} style={{
-              color: scrolled ? '#0057ff' : '#fff',
-              border: scrolled ? '1.5px solid #0057ff' : '1.5px solid #fff',
-              padding: '9px 22px',
-              borderRadius: '2px',
-              background: 'none',
-              cursor: 'pointer',
-              fontWeight: '900',
-              fontSize: '13px',
-              letterSpacing: '0.1em',
-              transition: 'color 0.3s, border-color 0.3s',
-            }}>
+            <button className="nav-entry-btn" onClick={() => window.open(ENTRY_URL, '_blank')}>
               ENTRY
             </button>
           </li>
         </ul>
 
         <button
-          onClick={() => setMenuOpen(v => !v)}
-          style={{
-            display: 'none',
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            color: textColor,
-            padding: '4px',
-            lineHeight: 0,
-          }}
           className="nav-hamburger"
+          style={{ display: 'none' }}
+          onClick={() => setMenuOpen(v => !v)}
           aria-label="Toggle menu"
         >
           <AnimatePresence mode="wait" initial={false}>
             {menuOpen
-              ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }} style={{ display: 'block' }}>
-                  <X size={26} />
-                </motion.span>
-              : <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }} style={{ display: 'block' }}>
-                  <Menu size={26} />
-                </motion.span>
+              ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.18 }} style={{ display: 'block' }}><X size={22} /></motion.span>
+              : <motion.span key="m" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.18 }} style={{ display: 'block' }}><Menu size={22} /></motion.span>
             }
           </AnimatePresence>
         </button>
@@ -149,62 +100,37 @@ const Navigator = () => {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-            style={{
-              position: 'fixed',
-              top: 0, left: 0, right: 0, bottom: 0,
-              backgroundColor: '#fff',
-              zIndex: 999,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '40px',
-            }}
+            className="mobile-menu"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1,  y: 0 }}
+            exit={{    opacity: 0,  y: -12 }}
+            transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
           >
-            {NAV_ITEMS.map((item, i) => (
-              <motion.button
-                key={item.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05 + i * 0.06, duration: 0.3 }}
-                onClick={() => handleNavClick(item)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  fontSize: '2rem',
-                  fontWeight: '900',
-                  letterSpacing: '0.1em',
-                  color: '#1a1a1a',
-                  cursor: 'pointer',
-                }}
-              >
-                {item.label}
-              </motion.button>
-            ))}
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05 + NAV_ITEMS.length * 0.06, duration: 0.3 }}
-              onClick={() => { setMenuOpen(false); window.open(ENTRY_URL, '_blank'); }}
-              style={{
-                background: '#0057ff',
-                border: 'none',
-                color: '#fff',
-                fontSize: '1rem',
-                fontWeight: '900',
-                letterSpacing: '0.15em',
-                padding: '16px 48px',
-                borderRadius: '2px',
-                cursor: 'pointer',
-                marginTop: '10px',
-              }}
-            >
-              ENTRY
-            </motion.button>
+            <div className="mobile-menu-body">
+              {NAV_ITEMS.map((item, i) => (
+                <motion.button
+                  key={item.label}
+                  className="mobile-menu-item"
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1,  x: 0 }}
+                  transition={{ delay: 0.04 + i * 0.055 }}
+                  onClick={() => handleNavClick(item)}
+                >
+                  {item.label}
+                </motion.button>
+              ))}
+              <div className="mobile-menu-entry-wrap">
+                <motion.button
+                  className="mobile-menu-entry"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.04 + NAV_ITEMS.length * 0.055 }}
+                  onClick={() => { setMenuOpen(false); window.open(ENTRY_URL, '_blank'); }}
+                >
+                  ENTRY →
+                </motion.button>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
