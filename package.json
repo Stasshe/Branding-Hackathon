@@ -16,7 +16,8 @@
     "framer-motion": "^x.x.x",
     "lucide-react": "^1.16.0",
     "react": "^x.x.x",
-    "react-dom": "^x.x.x"
+    "react-dom": "^x.x.x",
+    "react-router-dom": "^7.15.1"
   },
   "devDependencies": {
     "@types/react": "^x.x.x",

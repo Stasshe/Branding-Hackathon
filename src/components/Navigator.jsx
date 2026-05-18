@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logoImg1 from '../assets/rippro-logo.bmp';
 import logoImg2 from '../assets/RiSTロゴ.png';
 
 const NAV_ITEMS = [
-  { label: 'ABOUT', id: 'about' },
-  { label: 'SCHEDULE', id: 'schedule' },
-  { label: 'GUIDELINE', id: 'rule' },
+  { label: 'ABOUT', path: '/about' },
+  { label: 'SCHEDULE', path: '/schedule' },
+  { label: 'GUIDELINE', path: '/guideline' },
   { label: 'SPONSORS', id: 'sponsors' },
 ];
 
@@ -16,6 +17,8 @@ const ENTRY_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSedrQBRVl9iQsvCj-enY
 const Navigator = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
@@ -28,17 +31,34 @@ const Navigator = () => {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  const scrollTo = (id) => {
+  useEffect(() => {
     setMenuOpen(false);
-    setTimeout(() => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const top = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }, menuOpen ? 300 : 0);
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  const handleNavClick = (item) => {
+    setMenuOpen(false);
+    if (item.path) {
+      navigate(item.path);
+    } else if (item.id) {
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          const el = document.getElementById(item.id);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
+      } else {
+        const el = document.getElementById(item.id);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+    }
   };
 
-  const scrolled = isScrolled || menuOpen;
+  const isSubPage = location.pathname !== '/';
+  const scrolled = isScrolled || menuOpen || isSubPage;
   const textColor = scrolled ? '#000' : '#fff';
   const bgColor = scrolled ? 'rgba(255,255,255,0.97)' : 'transparent';
   const shadow = scrolled ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
@@ -60,13 +80,11 @@ const Navigator = () => {
         boxShadow: shadow,
         color: textColor,
       }}>
-        {/* Logos */}
-        <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '16px', textDecoration: 'none' }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '16px', textDecoration: 'none' }}>
           <img src={logoImg2} alt="RiST" style={{ height: scrolled ? '28px' : '40px', width: 'auto', transition: 'height 0.4s ease' }} />
           <img src={logoImg1} alt="RiPPro" style={{ height: scrolled ? '28px' : '40px', width: 'auto', transition: 'height 0.4s ease' }} />
-        </a>
+        </Link>
 
-        {/* Desktop nav */}
         <ul style={{
           display: 'flex',
           gap: '28px',
@@ -79,7 +97,7 @@ const Navigator = () => {
           padding: 0,
         }} className="nav-desktop">
           {NAV_ITEMS.map(item => (
-            <li key={item.id} onClick={() => scrollTo(item.id)} style={{ cursor: 'pointer', color: textColor }} className="nav-item">
+            <li key={item.label} onClick={() => handleNavClick(item)} style={{ cursor: 'pointer', color: textColor }} className="nav-item">
               {item.label}
             </li>
           ))}
@@ -101,7 +119,6 @@ const Navigator = () => {
           </li>
         </ul>
 
-        {/* Hamburger (mobile only) */}
         <button
           onClick={() => setMenuOpen(v => !v)}
           style={{
@@ -129,7 +146,6 @@ const Navigator = () => {
         </button>
       </nav>
 
-      {/* Mobile drawer */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -139,10 +155,7 @@ const Navigator = () => {
             transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
             style={{
               position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
+              top: 0, left: 0, right: 0, bottom: 0,
               backgroundColor: '#fff',
               zIndex: 999,
               display: 'flex',
@@ -154,11 +167,11 @@ const Navigator = () => {
           >
             {NAV_ITEMS.map((item, i) => (
               <motion.button
-                key={item.id}
+                key={item.label}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 + i * 0.06, duration: 0.3 }}
-                onClick={() => scrollTo(item.id)}
+                onClick={() => handleNavClick(item)}
                 style={{
                   background: 'none',
                   border: 'none',
