@@ -790,7 +790,7 @@ ul     { list-style: none; }
 }
 
 /* ─── Responsive: mobile ────────────────────────────────────── */
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .nav-list    { display: none !important; }
   .nav-hamburger { display: block !important; }
   .cards-grid  { grid-template-columns: 1fr; }
