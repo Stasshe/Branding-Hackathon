@@ -1,5 +1,14 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Target, Shield, Handshake, Megaphone, TrendingUp } from 'lucide-react';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i = 0) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
 
 const CRITERIA = [
   {
@@ -33,16 +42,25 @@ const About = () => (
   <div className="subpage">
     <div className="subpage-hero">
       <div className="subpage-hero-inner">
-        <p className="subpage-eyebrow">INFORMATION</p>
-        <h1 className="subpage-title">About</h1>
-        <p className="subpage-lead">Branding Hackathonとは</p>
+        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0} className="subpage-eyebrow">
+          INFORMATION
+        </motion.p>
+        <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="subpage-title">
+          About
+        </motion.h1>
+        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="subpage-lead">
+          Branding Hackathonとは
+        </motion.p>
       </div>
     </div>
 
     <div className="subpage-body">
-      <p className="subpage-intro">
+      <motion.p
+        variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+        className="subpage-intro"
+      >
         本ハッカソンは通常のハッカソンとは異なり、プロダクトの完成度だけでなく多角的な視点から評価します。以下の5項目が審査対象です。
-      </p>
+      </motion.p>
 
       <div className="criteria-list">
         {CRITERIA.map((c) => {
