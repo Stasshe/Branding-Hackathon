@@ -46,10 +46,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Build with Vite
-        env:
-          BUILD_MODE: production
-          NEXT_PUBLIC_IS_PRODUCTION_BUILD: 'true'
-          NEXT_PUBLIC_BASE_PATH: 'Branding-Hackathon'
         run: pnpm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
